@@ -19,6 +19,14 @@ div {text-align: center;}
 <div>Sample exploitable application.
 <s:a id="%{id}">your input id: ${id}
 </s:a>
+
+<p>output :</p>
+<p id="output"></p>
 </div>
+
+<script>
+        let id = document.getElementsByTagName("a")[0].id;
+        document.getElementById("output").innerHTML = id;
+</script>
 </body>
 </html>
