@@ -14,8 +14,8 @@ div {text-align: center;}
 </head>
 <body>
 
-<h1>Code to Cloud Lab</h1>
-<p>This is Code to Cloud Lab Vulnerable Application.</p>
+<h1>My Documentation Page</h1>
+<p>This is An Example of A Vulnerable Application.</p>
 <div>Sample exploitable application.
 <s:a id="%{id}">your input id: ${id}
 </s:a>
