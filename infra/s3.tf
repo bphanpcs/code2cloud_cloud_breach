@@ -13,6 +13,12 @@ resource "aws_s3_bucket" "code2cloud-secret-s3-bucket" {
 resource "aws_s3_bucket_acl" "code2cloud-secret-s3-bucket-acl" {
   bucket = aws_s3_bucket.code2cloud-secret-s3-bucket.id
   acl    = "private"
+  versioning_configuration {
+    status = "Disable"
+  }
+  block_public_acls       = false
+  block_public_policy     = false
+  restrict_public_buckets = false
 }
 
 resource "aws_s3_bucket_object" "code2cloud-shepards-credentials" {
