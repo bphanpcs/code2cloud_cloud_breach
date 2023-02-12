@@ -8,6 +8,9 @@ resource "aws_s3_bucket" "code2cloud-secret-s3-bucket" {
       Stack = "${var.stack-name}"
       Scenario = "${var.scenario-name}"
   }
+  versioning_configuration {
+    status = "Disalbed"
+  }
 }
 
 resource "aws_s3_bucket_acl" "code2cloud-secret-s3-bucket-acl" {
@@ -15,6 +18,11 @@ resource "aws_s3_bucket_acl" "code2cloud-secret-s3-bucket-acl" {
   acl    = "private"
 }
 
+resource "aws_s3_bucket_public_access_block" "s3_public_acl" {
+  bucket = aws_s3_bucket.code2cloud-secret-s3-bucket.id
+  block_public_acls   = false
+  block_public_policy = false
+}
 resource "aws_s3_bucket_object" "code2cloud-shepards-credentials" {
   bucket = "${aws_s3_bucket.code2cloud-secret-s3-bucket.id}"
   key = "admin-user.txt"
