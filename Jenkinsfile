@@ -43,32 +43,32 @@ pipeline {
         //     }
         // }
 
-      stage('IaC') {
-         steps {
-               withCredentials([
-                  string(credentialsId: 'PRISMA_ACCESS_KEY', variable: 'PRISMA_ACCESS_KEY'),
-                  string(credentialsId: 'PRISMA_SECRET_KEY', variable: 'PRISMA_SECRET_KEY')
-                  ]) {
-                  sh '''export PRISMA_API_URL=https://api.prismacloud.io
-                    virtualenv -p python3 .venv
-                    . .venv/bin/activate && pip install bridgecrew
-                    . .venv/bin/activate && bridgecrew --directory . --skip-path .venv --bc-api-key $PRISMA_ACCESS_KEY::$PRISMA_SECRET_KEY --use-enforcement-rules --repo-id qaswqaa/code2cloud_cloud_breach
-                    '''
-               }
-            }
-        }
-        stage('Image Deploy') {
-            steps {
-                withAWS(credentials: 'aws-cred', region: 'us-east-1') {
-                  sh ''' 
-                  docker ps
-                  $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
-                  echo "Image push into registry"
-                  docker push $ECR_REPOSITORY:$CONTAINER_NAME
-                  '''
-               }
-            }
-        }
+    //   stage('IaC') {
+    //      steps {
+    //            withCredentials([
+    //               string(credentialsId: 'PRISMA_ACCESS_KEY', variable: 'PRISMA_ACCESS_KEY'),
+    //               string(credentialsId: 'PRISMA_SECRET_KEY', variable: 'PRISMA_SECRET_KEY')
+    //               ]) {
+    //               sh '''export PRISMA_API_URL=https://api.prismacloud.io
+    //                 virtualenv -p python3 .venv
+    //                 . .venv/bin/activate && pip install bridgecrew
+    //                 . .venv/bin/activate && bridgecrew --directory . --skip-path .venv --bc-api-key $PRISMA_ACCESS_KEY::$PRISMA_SECRET_KEY --use-enforcement-rules --repo-id qaswqaa/code2cloud_cloud_breach
+    //                 '''
+    //            }
+    //         }
+    //     }
+    //     stage('Image Deploy') {
+    //         steps {
+    //             withAWS(credentials: 'aws-cred', region: 'us-east-1') {
+    //               sh ''' 
+    //               docker ps
+    //               $(aws ecr get-login --region $AWS_DEFAULT_REGION --no-include-email)
+    //               echo "Image push into registry"
+    //               docker push $ECR_REPOSITORY:$CONTAINER_NAME
+    //               '''
+    //            }
+    //         }
+    //     }
         // stage('Container Sandbox Scan') {
         //  steps {
         //     sshagent(credentials: ['ssh']) {
