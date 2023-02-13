@@ -11,17 +11,17 @@ RUN apt-get update && apt-get upgrade -y && apt-get install \
     kmod -y \
     unzip -y \
     p7zip-full -y
-#--------------end
+--------------end
 
-# Malware start
+Malware start
 
-# RUN mkdir /home/app
-# WORKDIR /home/app
+RUN mkdir /home/app
+WORKDIR /home/app
 
-# COPY entrypoint.sh /home/app/entrypoint.sh
-# ENTRYPOINT ["sh","entrypoint.sh"]
+COPY entrypoint.sh /home/app/entrypoint.sh
+ENTRYPOINT ["sh","entrypoint.sh"]
 
-# Malware end
+Malware end
 
 COPY ./ /usr/src/
 WORKDIR /usr/src
