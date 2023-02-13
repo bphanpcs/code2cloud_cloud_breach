@@ -89,16 +89,10 @@ resource "aws_security_group" "code2cloud-ec2-ssh-security-group" {
       from_port = 22
       to_port = 22
       protocol = "tcp"
-      cidr_blocks = [var.code2cloud_whitelist]
+      cidr_blocks = [
+          "0.0.0.0/0"
+      ]
   }
-
-  ingress {
-      from_port = 22
-      to_port = 22
-      protocol = "tcp"
-      cidr_blocks = [aws_vpc.code2cloud-vpc.cidr_block]
-  }
-
   egress {
       from_port = 0
       to_port = 0
