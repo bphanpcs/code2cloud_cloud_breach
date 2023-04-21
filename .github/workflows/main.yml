@@ -1,10 +1,11 @@
-jobs:
-  yor-job:
-    runs-on: ubuntu-latest
-    steps:
+steps:
       - name: Checkout repo
         uses: actions/checkout@v2
+
+      - name: Run Bridgecrew 
+        id: Bridgecrew
+        uses: bridgecrewio/bridgecrew-action@master 
+        env:
+          PRISMA_API_URL: https://api2.prismacloud.io
         with:
-          fetch-depth: 0
-      - name: Run yor action
-        uses: bridgecrewio/yor-action@main
+          api-key: ${{ secrets.BC_API_KEY }}
