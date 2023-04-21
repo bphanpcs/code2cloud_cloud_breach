@@ -1,4 +1,4 @@
-#IAM Role
+#IAM Role - my test role
 resource "aws_iam_role" "code2cloud-ec2-role" {
   name = "code2cloud-ec2-role-${var.code2cloudid}"
   assume_role_policy = <<EOF
